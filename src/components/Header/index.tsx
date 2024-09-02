@@ -20,10 +20,9 @@ function Header() {
     <>
       <header data-testid="header-component">
         <span>{!user ? 'Loading...' : user}</span>
-        <NavLink to="/search">Search</NavLink>
-        <NavLink to="/favorites">Favorites</NavLink>
-        <NavLink to="/profile">Profile</NavLink>
-        <NavLink to="/profile/edit">Profile Edit</NavLink>
+        <NavLink to="/search" data-testid="link-to-search">Search</NavLink>
+        <NavLink to="/favorites" data-testid="link-to-favorites">Favorites</NavLink>
+        <NavLink to="/profile" data-testid="link-to-profile">Profile</NavLink>
       </header>
     </>
   );
