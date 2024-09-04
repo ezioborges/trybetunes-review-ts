@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 
 function Search() {
   const [search, setSearch] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [artistCollection, setArtistColletion] = useState<AlbumType[] | null>(
-    null
-  );
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('')
   const [showTitle, setShowTitle] = useState(false);
+  const [artistCollection, setArtistColletion] = useState<AlbumType[]>([]);
 
   const validateSearch = (artist: string) => {
     return artist.length > 2;
@@ -27,21 +25,30 @@ function Search() {
     const collections = await searchAlbumsAPI(name);
 
     if (!collections.length) {
+      setErrorMsg("Nenhum álbum foi encontrado");
+      setShowTitle(false);
+      setArtistColletion([]);
       setLoading(false);
-      setErrorMsg('Nenhum álbum foi encontrado');
-      setArtistColletion([])
-      return
+      return;
     }
 
     setArtistColletion(collections);
-    setShowTitle(true)
+    setErrorMsg('')
+    setShowTitle(true);
     setLoading(false);
   };
 
   const handleClick = async () => {
+    setSearch("");
+    setDisabled(true);
     return await getArtistCollecion(search);
   };
 
+  
+  const nameArtist = artistCollection.find((ar) => ar);
+  const titleScream = (
+    <h1>{`Resultado de álbuns de: ${nameArtist?.artistName}`}</h1>
+  );
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -65,7 +72,7 @@ function Search() {
         </button>
       </div>
       <div>
-        {showTitle && <h1>{ `Resultado de álbuns de: ${search}` }</h1>}
+        {showTitle && titleScream}
         {errorMsg && <h1>{errorMsg}</h1>}
         {!loading && (
           <ul>
@@ -80,16 +87,20 @@ function Search() {
                 releaseDate,
                 trackCount,
               }) => (
-                <Link to={`/album/${collectionId}`}
-                  key={collectionId}>
-                  <p>{ artistId }</p>
-                  <p>{artistName}</p>
-                  <p>{collectionId}</p>
-                  <p>{collectionName}</p>
-                  <p>{collectionPrice}</p>
-                  <img src={artworkUrl100} alt={`capa do album ${collectionName}`} />
-                  <p>{releaseDate}</p>
-                  <p>{trackCount}</p>
+                <Link to={`/album/${collectionId}`} key={collectionId}>
+                  <div style={{ border: "1px solid red" }}>
+                    <p>{artistId}</p>
+                    <p>{artistName}</p>
+                    <p>{collectionId}</p>
+                    <p>{collectionName}</p>
+                    <p>{collectionPrice}</p>
+                    <img
+                      src={artworkUrl100}
+                      alt={`capa do album ${collectionName}`}
+                    />
+                    <p>{releaseDate}</p>
+                    <p>{trackCount}</p>
+                  </div>
                 </Link>
               )
             )}
