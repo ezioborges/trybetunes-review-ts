@@ -40,13 +40,17 @@ function Album() {
           <h1>Album Page</h1>
           <ul>
             {collection.map(
-              ({ artistName, collectionName, previewUrl, trackName }, i) => (
+              (
+                { artistName, collectionName, previewUrl, trackName, trackId },
+                i
+              ) => (
                 <MusicCard
                   key={i + 1}
                   artistName={artistName}
                   collectionName={collectionName}
                   previewUrl={previewUrl}
                   trackName={trackName}
+                  trackId={trackId}
                 />
               )
             )}

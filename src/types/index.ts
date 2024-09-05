@@ -14,4 +14,11 @@ export type songsColletion = {
   collectionName: string;
   trackName: string;
   previewUrl: string;
+  trackId: number;
+};
+
+export type Song = {
+  trackId: number;
+  trackName: string;
+  artistName: string;
 };
