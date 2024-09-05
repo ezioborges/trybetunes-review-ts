@@ -11,8 +11,6 @@ function Header() {
       const userName = await getUser();
 
       setUser(userName.name);
-
-      console.log(userName);
     };
     userFetch();
   }, []);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import searchAlbumsAPI from "../../services/searchAbumsAPIs";
 import { AlbumType } from "../../types";
 import { Link } from "react-router-dom";
+import AlbunsCard from "../../components/AlbunsCard";
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -12,12 +13,12 @@ function Search() {
   const [artistCollection, setArtistColletion] = useState<AlbumType[]>([]);
 
   const validateSearch = (artist: string) => {
-    return artist.length > 2;
+    return artist.length <= 2; 
   };
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(target.value);
-    setDisabled(!validateSearch(target.value));
+    setDisabled(validateSearch(target.value));
   };
 
   const getArtistCollecion = async (name: string) => {
@@ -88,19 +89,16 @@ function Search() {
                 trackCount,
               }) => (
                 <Link to={`/album/${collectionId}`} key={collectionId}>
-                  <div style={{ border: "1px solid red" }}>
-                    <p>{artistId}</p>
-                    <p>{artistName}</p>
-                    <p>{collectionId}</p>
-                    <p>{collectionName}</p>
-                    <p>{collectionPrice}</p>
-                    <img
-                      src={artworkUrl100}
-                      alt={`capa do album ${collectionName}`}
-                    />
-                    <p>{releaseDate}</p>
-                    <p>{trackCount}</p>
-                  </div>
+                  <AlbunsCard
+                    artistId={artistId}
+                    artistName={artistName}
+                    collectionId={collectionId}
+                    collectionName={collectionName}
+                    collectionPrice={collectionPrice}
+                    artworkUrl100={artworkUrl100}
+                    releaseDate={releaseDate}
+                    trackCount={trackCount}
+                  />
                 </Link>
               )
             )}

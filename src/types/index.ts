@@ -8,3 +8,10 @@ export type AlbumType = {
   releaseDate: string;
   trackCount: number;
 };
+
+export type songsColletion = {
+  artistName: string;
+  collectionName: string;
+  trackName: string;
+  previewUrl: string;
+};
