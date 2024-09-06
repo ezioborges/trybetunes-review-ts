@@ -1,4 +1,4 @@
-import { Song } from "../types";
+import { songsColletion } from "../types";
 
 // Tipos e constantes
 const FAVORITE_SONGS_KEY = 'favorite_songs';
@@ -9,9 +9,9 @@ if (!JSON.parse(localStorage.getItem(FAVORITE_SONGS_KEY) as string)) {
   localStorage.setItem(FAVORITE_SONGS_KEY, JSON.stringify([]));
 }
 
-export const readFavoriteSongs = (): Song[] => JSON.parse(localStorage.getItem(FAVORITE_SONGS_KEY) as string);
+export const readFavoriteSongs = (): songsColletion[] => JSON.parse(localStorage.getItem(FAVORITE_SONGS_KEY) as string);
 
-export const saveFavoriteSongs = (favoriteSongs: Song[]): void => localStorage
+export const saveFavoriteSongs = (favoriteSongs: songsColletion[]): void => localStorage
   .setItem(FAVORITE_SONGS_KEY, JSON.stringify(favoriteSongs));
 
 const simulateRequest = <T>(response: T) => (callback: (response: T) => void): void => {
@@ -20,12 +20,12 @@ const simulateRequest = <T>(response: T) => (callback: (response: T) => void): v
   }, TIMEOUT);
 };
 
-export const getFavoriteSongs = (): Promise<Song[]> => new Promise((resolve) => {
+export const getFavoriteSongs = (): Promise<songsColletion[]> => new Promise((resolve) => {
   const favoriteSongs = readFavoriteSongs();
   simulateRequest(favoriteSongs)(resolve);
 });
 
-export const addSong = (song: Song): Promise<string> => new Promise((resolve) => {
+export const addSong = (song: songsColletion): Promise<string> => new Promise((resolve) => {
   if (song) {
     const favoriteSongs = readFavoriteSongs();
     saveFavoriteSongs([...favoriteSongs, song]);
@@ -33,7 +33,7 @@ export const addSong = (song: Song): Promise<string> => new Promise((resolve) =>
   simulateRequest(SUCCESS_STATUS)(resolve);
 });
 
-export const removeSong = (song: Song): Promise<string> => new Promise((resolve) => {
+export const removeSong = (song: songsColletion): Promise<string> => new Promise((resolve) => {
   const favoriteSongs = readFavoriteSongs();
   saveFavoriteSongs(favoriteSongs.filter((s) => s.trackId !== song.trackId));
   simulateRequest(SUCCESS_STATUS)(resolve);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Song, songsColletion } from "../../types";
+import { songsColletion } from "../../types";
 import {
   addSong,
   readFavoriteSongs,
@@ -14,7 +14,6 @@ function MusicCard({
   trackId,
 }: songsColletion) {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favoriteList, setFavoriteList] = useState<Song[]>([]);
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
@@ -22,61 +21,66 @@ function MusicCard({
       const favSongs = await readFavoriteSongs();
       const isSongFavorite = favSongs.some((song) => song.trackId === trackId);
       setIsFavorite(isSongFavorite);
-    }
-    loadFavorites()
-  }, [trackId])
+    };
+    loadFavorites();
+  }, [trackId]);
 
   const handleChange = async ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
     setLoad(true);
-    setIsFavorite((fav) => !fav);
-
+    setIsFavorite((prev) => !prev);
     const check = target.checked;
+    const trackId = +target.value;
 
     if (check) {
-      const newSong = {
-        trackId,
-        trackName,
+      const newSong: songsColletion = {
         artistName,
-      };
+        collectionName,
+        previewUrl,
+        trackId,
+        trackName
+      }
 
       await addSong(newSong);
-      setFavoriteList((prevLis) => [...prevLis, newSong]);
       setIsFavorite(true);
     } else {
       const favSongs = await readFavoriteSongs();
-      const newList = favSongs.filter((song) => song.trackId !== trackId);
-      console.log("🚀 ~ newList:", newList)
-      setFavoriteList(newList);
-      await saveFavoriteSongs(newList);
+      const newList = favSongs.filter((song) => song.trackId !== trackId)
+      await saveFavoriteSongs(newList)
 
-      setIsFavorite(false);
+      window.location.reload();
+      setIsFavorite(false)
     }
-    setLoad(false)
+
+    setLoad(false);
   };
+
   return (
-    <div style={{ border: "1px solid black" }}>
-      <p>{artistName}</p>
-      <p>{collectionName}</p>
-      <p>{trackName}</p>
-      <audio data-testid="audio-component" src={previewUrl} controls>
-        <track kind="captions" />O seu navegador não suporta o elemento{" "}
-        <code>audio</code>.
-      </audio>
-      <label htmlFor="favoriteSong">
-        {load ? (
-          "Loading ..."
-        ) : (
-          <input
-            type="checkbox"
-            name="favoriteSong"
-            checked={isFavorite}
-            onChange={handleChange}
-          />
-        )}
-      </label>
-    </div>
+    <>
+      <div style={{ border: "1px solid black" }}>
+        <p>{artistName}</p>
+        <p>{collectionName}</p>
+        <p>{trackName}</p>
+        <audio data-testid="audio-component" src={previewUrl} controls>
+          <track kind="captions" />O seu navegador não suporta o elemento{" "}
+          <code>audio</code>.
+        </audio>
+        <label htmlFor="favoriteSong">
+          {load ? (
+            "Loading ..."
+          ) : (
+            <input
+              type="checkbox"
+              name="favoriteSong"
+              value={trackId}
+              checked={isFavorite}
+              onChange={handleChange}
+            />
+          )}
+        </label>
+      </div>
+    </>
   );
 }
 

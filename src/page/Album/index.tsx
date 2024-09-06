@@ -17,18 +17,19 @@ function Album() {
     return +collectionId;
   };
 
+  
   const getSongs = async () => {
     setLoading(true);
     const colletionId = getColletionSongs(location.pathname);
     const listMusics = await getMusics(colletionId);
-
+    
     setCollection(listMusics.slice(1));
     // ver se o tamanho do listMusics é maior que zero,
     // caso sim ele pego o nome do artista na primeira posição do array
     if (listMusics.length > 0) {
       setName(listMusics[0].artistName);
     }
-
+    
     setLoading(false);
   };
 

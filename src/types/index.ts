@@ -17,8 +17,9 @@ export type songsColletion = {
   trackId: number;
 };
 
-export type Song = {
-  trackId: number;
-  trackName: string;
-  artistName: string;
+export type User = {
+  name: string;
+  email: string;
+  image: string;
+  description: string;
 };

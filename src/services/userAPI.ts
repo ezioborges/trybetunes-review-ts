@@ -14,7 +14,7 @@ const readUser = (): User | null => {
   return user ? JSON.parse(user) : null;
 };
 
-const saveUser = (user: User): void => {
+export const saveUser = (user: User): void => {
   localStorage.setItem(USER_KEY, JSON.stringify(user));
 };
 
