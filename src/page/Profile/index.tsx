@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getUser } from "../../services/userAPI";
 import { User } from "../../types";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 function Profile() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function Profile() {
   return (
     <div>
       {isLoad ? (
-        "Loading..."
+        <Loading />
       ) : (
         <>
           <div>

@@ -10,14 +10,14 @@ import Favorites from './page/Favorites';
 import Profile from './page/Profile';
 import ProfileEdit from './page/ProfileEdit';
 import { useState } from 'react';
+import { validateLogin } from './utils/validate';
 
 function App() {
   const [errorMsg, setErrorMsg] = useState<string[]>([])
   
   const isValidLogin = (name: string) => {
-    const errors: string[] = []
+    const errors = validateLogin(name)
     
-    if (name.length < 3) errors.push('O campo de login deve ter no minimo 3 caracteres.');
 
     setErrorMsg(errors);
 

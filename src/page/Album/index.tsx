@@ -3,6 +3,7 @@ import getMusics from "../../services/musicsAPI";
 import { useEffect, useState } from "react";
 import { songsColletion } from "../../types";
 import MusicCard from "../../components/MusicCard";
+import Loading from "../../components/Loading";
 
 function Album() {
   const location = useLocation();
@@ -40,7 +41,7 @@ function Album() {
     FetchSongs();
   }, []);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
 
   return (
     <>

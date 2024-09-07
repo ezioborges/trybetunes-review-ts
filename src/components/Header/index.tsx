@@ -17,7 +17,7 @@ function Header() {
   return (
     <>
       <header data-testid="header-component">
-        <span>{!user ? 'Loading...' : user}</span>
+        <span>{!user ? <img src="../../small-load-40.svg" /> : user}</span>
         <NavLink to="/search" data-testid="link-to-search">Search</NavLink>
         <NavLink to="/favorites" data-testid="link-to-favorites">Favorites</NavLink>
         <NavLink to="/profile" data-testid="link-to-profile">Profile</NavLink>

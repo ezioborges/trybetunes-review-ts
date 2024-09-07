@@ -6,12 +6,15 @@ import {
   saveFavoriteSongs,
 } from "../../services/favoriteSongsAPI";
 
+import "./music-card.css";
+
 function MusicCard({
   artistName,
   collectionName,
   trackName,
   previewUrl,
   trackId,
+  onFavoriteToggle
 }: songsColletion) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [load, setLoad] = useState(false);
@@ -25,13 +28,11 @@ function MusicCard({
     loadFavorites();
   }, [trackId]);
 
-  const handleChange = async ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoad(true);
     setIsFavorite((prev) => !prev);
-    const check = target.checked;
-    const trackId = +target.value;
+    const check = e.target.checked;
+    const trackId = +e.target.value;
 
     if (check) {
       const newSong: songsColletion = {
@@ -39,18 +40,24 @@ function MusicCard({
         collectionName,
         previewUrl,
         trackId,
-        trackName
-      }
+        trackName,
+      };
 
       await addSong(newSong);
       setIsFavorite(true);
+      if (onFavoriteToggle) {
+        onFavoriteToggle(trackId, true)
+      }
     } else {
+      e.preventDefault();
       const favSongs = await readFavoriteSongs();
-      const newList = favSongs.filter((song) => song.trackId !== trackId)
-      await saveFavoriteSongs(newList)
+      const newList = favSongs.filter((song) => song.trackId !== trackId);
+      await saveFavoriteSongs(newList);
 
-      window.location.reload();
-      setIsFavorite(false)
+      setIsFavorite(false);
+      if (onFavoriteToggle) {
+        onFavoriteToggle(trackId, false)
+      }
     }
 
     setLoad(false);
@@ -58,7 +65,7 @@ function MusicCard({
 
   return (
     <>
-      <div style={{ border: "1px solid black" }}>
+      <div className="music-card-content">
         <p>{artistName}</p>
         <p>{collectionName}</p>
         <p>{trackName}</p>
@@ -68,7 +75,11 @@ function MusicCard({
         </audio>
         <label htmlFor="favoriteSong">
           {load ? (
-            "Loading ..."
+            <img
+              className="size-load"
+              src="../../small-load-40.svg"
+              alt="loading..."
+            />
           ) : (
             <input
               type="checkbox"

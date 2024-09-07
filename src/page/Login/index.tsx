@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../services/userAPI";
+import Loading from "../../components/Loading";
 
 type LoginProp = {
   errorMsg: string[];
@@ -26,7 +27,7 @@ function Login({ errorMsg, isValidLogin }: LoginProp) {
     }
   };
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
   return (
     <div>
       <h1>TrybeTunes</h1>

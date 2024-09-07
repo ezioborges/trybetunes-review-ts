@@ -3,6 +3,7 @@ import searchAlbumsAPI from "../../services/searchAbumsAPIs";
 import { AlbumType } from "../../types";
 import { Link } from "react-router-dom";
 import AlbunsCard from "../../components/AlbunsCard";
+import Loading from "../../components/Loading";
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -50,7 +51,7 @@ function Search() {
   const titleScream = (
     <h1>{`Resultado de álbuns de: ${nameArtist?.artistName}`}</h1>
   );
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
 
   return (
     <div>

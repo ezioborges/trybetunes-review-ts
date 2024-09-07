@@ -2,50 +2,60 @@ import { useEffect, useState } from "react";
 import { readFavoriteSongs } from "../../services/favoriteSongsAPI";
 import { songsColletion } from "../../types";
 import MusicCard from "../../components/MusicCard";
+import Loading from "../../components/Loading";
 
 function Favorites() {
-    const [favSongs, setFavSongs] = useState<songsColletion[]>([])
-    const [isLoad, setIsLoad] = useState(false)
+  const [favSongs, setFavSongs] = useState<songsColletion[]>([]);
+  const [isLoad, setIsLoad] = useState(false);
 
+  const getFavSongs = async () => {
+    setIsLoad(true);
+    const songs = await readFavoriteSongs();
+    setFavSongs(songs);
+    setIsLoad(false);
+  };
 
-    const getFavSongs = async () => {
-        setIsLoad(true);
-        const songs = await readFavoriteSongs();
-        setFavSongs(songs)
-        setIsLoad(false);
+  useEffect(() => {
+    const readFav = async () => {
+      getFavSongs();
+    };
+    readFav();
+  }, []);
+
+  const handleFavoriteToggle = (trackId: number, isFavorite: boolean) => {
+    if (!isFavorite) {
+      setFavSongs((prevFavSongs) =>
+        prevFavSongs.filter((song) => song.trackId !== trackId)
+      );
     }
+  };
 
-    useEffect(() => {
-        const readFav = async () => {
-            getFavSongs()
-        }
-        readFav()
-    }, [])
+  if (isLoad) return <Loading />;
 
-    if(isLoad) return <h1>Loading...</h1>
-
-    
-    return (
-        <div>
-            <h1>Sua musicas Favoritas</h1>
-            <ul>
-                {
-                    !isLoad && (
-                        favSongs.map(({ artistName, collectionName, previewUrl, trackId, trackName }, i) => (
-                            <MusicCard
-                                key={i}
-                                artistName={artistName}
-                                collectionName={collectionName}
-                                previewUrl={previewUrl}
-                                trackId={trackId}
-                                trackName={trackName}
-                            />
-                        ))
-                    ) 
-                }
-            </ul>
-        </div>
-    );
- };
+  return (
+    <div>
+      <h1>Sua musicas Favoritas</h1>
+      <ul>
+        {!isLoad &&
+          favSongs.map(
+            (
+              { artistName, collectionName, previewUrl, trackId, trackName },
+              i
+            ) => (
+              <MusicCard
+                key={i}
+                artistName={artistName}
+                collectionName={collectionName}
+                previewUrl={previewUrl}
+                trackId={trackId}
+                trackName={trackName}
+                onFavoriteToggle={handleFavoriteToggle}
+              />
+            )
+          )}
+      </ul>
+    </div>
+  );
+}
 
 export default Favorites;

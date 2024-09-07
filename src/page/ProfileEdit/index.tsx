@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUser, createUser } from "../../services/userAPI";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 function ProfileEdit() {
   const navigate = useNavigate();
@@ -95,7 +96,7 @@ function ProfileEdit() {
     getInfos();
   }, []);
 
-  if (load) return <h1>Loading...</h1>;
+  if (load) return <Loading />;
 
   return (
     <div>

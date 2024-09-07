@@ -15,6 +15,7 @@ export type songsColletion = {
   trackName: string;
   previewUrl: string;
   trackId: number;
+  onFavoriteToggle?: (trackId: number, isFavorite: boolean) => void;
 };
 
 export type User = {
