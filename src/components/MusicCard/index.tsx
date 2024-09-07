@@ -32,7 +32,6 @@ function MusicCard({
     setLoad(true);
     setIsFavorite((prev) => !prev);
     const check = e.target.checked;
-    const trackId = +e.target.value;
 
     if (check) {
       const newSong: songsColletion = {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getUser, createUser } from "../../services/userAPI";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
+import { validateProfileEdit } from "../../utils/validate";
 
 function ProfileEdit() {
   const navigate = useNavigate();
@@ -15,9 +16,9 @@ function ProfileEdit() {
     description: "",
   });
   const userInfos = async () => {
-    const userLocal = await getUser();
+    const userLocalStorage = await getUser();
 
-    setUser(userLocal);
+    setUser(userLocalStorage);
   };
 
   const changeInfos = async () => {
@@ -68,19 +69,10 @@ function ProfileEdit() {
     });
   };
 
-  const emailValid = (email: string) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
+
 
   const valiteInputs = () => {
-    const errors: string[] = [];
-
-    if (!emailValid(user.email))
-      errors.push("Email não encontrado! Verifique se está correto.");
-    if (user.name.length < 1) errors.push("Por favor insera um nome!");
-    if (user.description.length < 1)
-      errors.push("Por favor insera uma descrição!");
+    const errors = validateProfileEdit(user.name, user.email, user.description)
 
     setErrorMsg(errors);
 

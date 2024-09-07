@@ -12,7 +12,7 @@ function Album() {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
 
-  const getColletionSongs = (location: string) => {
+  const getColletionId = (location: string) => {
     const collectionId = location.slice(7);
 
     return +collectionId;
@@ -21,7 +21,7 @@ function Album() {
   
   const getSongs = async () => {
     setLoading(true);
-    const colletionId = getColletionSongs(location.pathname);
+    const colletionId = getColletionId(location.pathname);
     const listMusics = await getMusics(colletionId);
     
     setCollection(listMusics.slice(1));

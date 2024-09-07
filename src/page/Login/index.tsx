@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../services/userAPI";
 import Loading from "../../components/Loading";
+import { LoginType } from "../../types";
 
-type LoginProp = {
-  errorMsg: string[];
-  isValidLogin: (name: string) => boolean;
-};
 
-function Login({ errorMsg, isValidLogin }: LoginProp) {
+
+function Login({ errorMsg, isValidLogin }: LoginType) {
   const navigate = useNavigate();
   const [login, setLogin] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);

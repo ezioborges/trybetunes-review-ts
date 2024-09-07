@@ -1,3 +1,8 @@
+export type LoginType = {
+  errorMsg: string[];
+  isValidLogin: (name: string) => boolean;
+};
+
 export type AlbumType = {
   artistId: number;
   artistName: string;

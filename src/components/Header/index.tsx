@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getUser } from "../../services/userAPI";
 import { NavLink } from "react-router-dom";
 
-import './header.css';
+import "./header.css";
 
 function Header() {
   const [user, setUser] = useState<string>("");
@@ -18,9 +18,15 @@ function Header() {
     <>
       <header data-testid="header-component">
         <span>{!user ? <img src="../../small-load-40.svg" /> : user}</span>
-        <NavLink to="/search" data-testid="link-to-search">Search</NavLink>
-        <NavLink to="/favorites" data-testid="link-to-favorites">Favorites</NavLink>
-        <NavLink to="/profile" data-testid="link-to-profile">Profile</NavLink>
+        <NavLink to="/search" data-testid="link-to-search">
+          Search
+        </NavLink>
+        <NavLink to="/favorites" data-testid="link-to-favorites">
+          Favorites
+        </NavLink>
+        <NavLink to="/profile" data-testid="link-to-profile">
+          Profile
+        </NavLink>
       </header>
     </>
   );

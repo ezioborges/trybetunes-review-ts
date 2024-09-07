@@ -4,6 +4,7 @@ import { AlbumType } from "../../types";
 import { Link } from "react-router-dom";
 import AlbunsCard from "../../components/AlbunsCard";
 import Loading from "../../components/Loading";
+import { validateSearch } from "../../utils/validate";
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -13,9 +14,7 @@ function Search() {
   const [showTitle, setShowTitle] = useState(false);
   const [artistCollection, setArtistColletion] = useState<AlbumType[]>([]);
 
-  const validateSearch = (artist: string) => {
-    return artist.length <= 2; 
-  };
+
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(target.value);

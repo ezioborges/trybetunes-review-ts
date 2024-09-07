@@ -16,11 +16,8 @@ function Favorites() {
   };
 
   useEffect(() => {
-    const readFav = async () => {
       getFavSongs();
-    };
-    readFav();
-  }, []);
+    }, []);
 
   const handleFavoriteToggle = (trackId: number, isFavorite: boolean) => {
     if (!isFavorite) {
