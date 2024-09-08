@@ -2,19 +2,19 @@
 
 Revisão do projeto TrybeTunes desenvolvido durante o curso de desenvolvimento web na trybe. </br></br> O desafio do projeto se baseia em:</br></br>
 
-    - Criar as rotas da aplicação;
-    - Criar um formulário de identificação;
-    - Criar o componente de cabeçalho;
-    - Criar os links de navegação;
-    - Criar o campo para pesquisar músicas;
-    - Simular uma requisição a API e retornar artistas;
-    - Criar uma lista de músicas do álbum selecionado;
-    - Criar o mecanismo de adicionar músicas na lista de músicas favoritas;
-    - Recuperar as músicas favoritas ao entrar na página favoritas;
-    - Excluir música da lista de favoritas;
-    - Cria lista de músicas favoritas;
-    - Cria exibição do perfil;
-    - Cria formulário de edição do perfil;
+ - Criar as rotas da aplicação;
+ - Criar um formulário de identificação;
+ - Criar o componente de cabeçalho;
+ - Criar os links de navegação;
+ - Criar o campo para pesquisar músicas;
+ - Simular uma requisição a API e retornar artistas;
+ - Criar uma lista de músicas do álbum selecionado;
+ - Criar o mecanismo de adicionar músicas na lista de músicas favoritas;
+ - Recuperar as músicas favoritas ao entrar na página favoritas;
+ - Excluir música da lista de favoritas;
+ - Cria lista de músicas favoritas;
+ - Cria exibição do perfil;
+ - Cria formulário de edição do perfil;
 
 # Tecnologias utilizadas!
 
