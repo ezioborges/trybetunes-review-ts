@@ -1,0 +1,9 @@
+.form-content {
+    border-radius: 50px;
+    height: 400px;
+    width: 750px;
+}
+
+.error-content {
+    background-color: white;
+}

@@ -1,16 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
-import Login from './page/Login';
-import Layout from './page/Layout';
+import Layout from './pages/Layout';
 
 import './App.css';
-import Search from './page/Search';
-import NotFound from './page/NotFound';
-import Album from './page/Album';
-import Favorites from './page/Favorites';
-import Profile from './page/Profile';
-import ProfileEdit from './page/ProfileEdit';
+import Search from './pages/Search';
+import NotFound from './pages/NotFound';
+import Album from './pages/Album';
+import Favorites from './pages/Favorites';
+import Profile from './pages/Profile';
+import ProfileEdit from './pages/ProfileEdit';
 import { useState } from 'react';
 import { validateLogin } from './utils/validate';
+import Login from './pages/Login';
 
 function App() {
   const [errorMsg, setErrorMsg] = useState<string[]>([])
@@ -33,7 +33,8 @@ function App() {
           <Route path='/album/:id' element={ <Album /> } />
           <Route path='/favorites' element={ <Favorites /> } />
           <Route path='/profile' element={ <Profile /> } />
-          <Route path='/profile/edit' element={ <ProfileEdit /> } />
+          <Route path='/profile/edit' element={<ProfileEdit />} />
+          {/* <Route path='/testes' element={} /> */}
         </Route>
         <Route path='/*' element={ <NotFound /> } />
       </Routes>

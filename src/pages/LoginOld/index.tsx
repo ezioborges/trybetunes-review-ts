@@ -4,7 +4,7 @@ import { createUser } from "../../services/userAPI";
 import Loading from "../../components/Loading";
 import { LoginType } from "../../types";
 
-
+import "./login.css";
 
 function Login({ errorMsg, isValidLogin }: LoginType) {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function Login({ errorMsg, isValidLogin }: LoginType) {
 
   if (loading) return <Loading />;
   return (
-    <div>
+    <div className="container-fluid">
       <h1>TrybeTunes</h1>
       <div>
         <input
