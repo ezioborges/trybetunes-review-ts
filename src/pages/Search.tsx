@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import searchAlbumsAPI from "../../services/searchAbumsAPIs";
-import { AlbumType } from "../../types";
+import { useState } from "react";
+import searchAlbumsAPI from "../services/searchAbumsAPIs";
+import { validateSearch } from "../utils/validate";
+import Loading from "../components/Loading";
+import { AlbumType } from "../types";
 import { Link } from "react-router-dom";
-import AlbunsCard from "../../components/AlbunsCard";
-import Loading from "../../components/Loading";
-import { validateSearch } from "../../utils/validate";
+import AlbunsCard from "../components/AbumCard";
+
+// import './../styles/search.css';
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -13,8 +15,6 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
   const [artistCollection, setArtistColletion] = useState<AlbumType[]>([]);
-
-
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(target.value);
@@ -34,7 +34,7 @@ function Search() {
     }
 
     setArtistColletion(collections);
-    setErrorMsg('')
+    setErrorMsg("");
     setShowTitle(true);
     setLoading(false);
   };
@@ -45,38 +45,44 @@ function Search() {
     return await getArtistCollecion(search);
   };
 
-  
   const nameArtist = artistCollection.find((ar) => ar);
   const titleScream = (
     <h1>{`Resultado de álbuns de: ${nameArtist?.artistName}`}</h1>
   );
   if (loading) return <Loading />;
-
   return (
-    <div>
-      <div>
+    <>
+      <div className="d-flex justify-content-center p-4 mt-3 bg-danger-subtle">
         <label htmlFor="search">
+          Pesquisa:
           <input
-            name="search"
             type="text"
-            data-testid="search-artist-input"
             value={search}
             onChange={handleChange}
+            className="mx-4"
           />
+          <button
+            data-testid="search-artist-button"
+            className="btn btn-primary"
+            disabled={disabled}
+            onClick={handleClick}
+          >
+            Pesquisar
+          </button>
         </label>
-        <button
-          data-testid="search-artist-button"
-          disabled={disabled}
-          onClick={handleClick}
-        >
-          Pesquisar
-        </button>
       </div>
-      <div>
+      <div className="d-flex justify-content-center mt-2">
         {showTitle && titleScream}
+      </div>
+      <div className="d-flex justify-content-center">
         {errorMsg && <h1>{errorMsg}</h1>}
-        {!loading && (
-          <ul>
+      </div>
+      {!loading && (
+        <ul>
+          <div
+            className="d-flex flex-wrap"
+            data-bs-spy="scroll"
+          >
             {artistCollection?.map(
               ({
                 artistId,
@@ -88,7 +94,7 @@ function Search() {
                 releaseDate,
                 trackCount,
               }) => (
-                <Link to={`/album/${collectionId}`} key={collectionId}>
+                <Link to={`/album/${collectionId}`} key={collectionId} className="link-style">
                   <AlbunsCard
                     artistId={artistId}
                     artistName={artistName}
@@ -102,10 +108,10 @@ function Search() {
                 </Link>
               )
             )}
-          </ul>
-        )}
-      </div>
-    </div>
+          </div>
+        </ul>
+      )}
+    </>
   );
 }
 

@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './pages/Layout';
 
 import './App.css';
-import Search from './pages/Search';
 import NotFound from './pages/NotFound';
 import Album from './pages/Album';
 import Favorites from './pages/Favorites';
@@ -11,6 +10,7 @@ import ProfileEdit from './pages/ProfileEdit';
 import { useState } from 'react';
 import { validateLogin } from './utils/validate';
 import Login from './pages/Login';
+import Search from './pages/Search';
 
 function App() {
   const [errorMsg, setErrorMsg] = useState<string[]>([])
@@ -25,7 +25,7 @@ function App() {
   }
 
   return (
-    <>
+    <div>
       <Routes>
         <Route path='/' element={ <Layout /> }>
           <Route index element={<Login  errorMsg={errorMsg} isValidLogin={isValidLogin} />} />
@@ -38,7 +38,7 @@ function App() {
         </Route>
         <Route path='/*' element={ <NotFound /> } />
       </Routes>
-    </>
+    </div>
   )
 }
 

@@ -1,5 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../components/Header";
+
+import '../../styles/layout.css';
 
 function Layout() {
     const location = useLocation();
@@ -7,7 +9,7 @@ function Layout() {
     const hideHeader = location.pathname === '/';
 
     return (
-        <div>
+        <div className="layout">
             {!hideHeader && <Header />}
             <Outlet />
         </div>

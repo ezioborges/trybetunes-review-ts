@@ -29,3 +29,8 @@ export type User = {
   image: string;
   description: string;
 };
+
+export type NavLinkComponentType = {
+  link: string;
+  dataTest: string;
+}
