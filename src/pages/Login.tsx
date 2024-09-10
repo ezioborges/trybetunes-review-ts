@@ -30,7 +30,10 @@ function Login({ errorMsg, isValidLogin }: LoginType) {
   if (loading) return <Loading />;
 
   return (
-    <div className="">
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{ height: "100vh" }}
+    >
       <form
         onSubmit={handleSubmit}
         className={`d-flex 
@@ -43,7 +46,7 @@ function Login({ errorMsg, isValidLogin }: LoginType) {
         bg-primary
         rounded`}
       >
-        <div className="mb-3">
+        <div className="mb-3 d-flex flex-column align-items-center">
           <label htmlFor="email" className="form-label text-white">
             <h2>Nome:</h2>
           </label>
@@ -61,9 +64,7 @@ function Login({ errorMsg, isValidLogin }: LoginType) {
           {errorMsg &&
             errorMsg.map((err) => (
               <div className="error-content p-2 mt-3 text-danger" key={err}>
-                <p className="m-0">
-                  {err}
-                </p>
+                <p className="m-0">{err}</p>
               </div>
             ))}
         </div>
