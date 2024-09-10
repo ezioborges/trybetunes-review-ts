@@ -6,7 +6,7 @@ import { AlbumType } from "../types";
 import { Link } from "react-router-dom";
 import AlbunsCard from "../components/AbumCard";
 
-// import './../styles/search.css';
+import '../styles/search.css';
 
 function Search() {
   const [search, setSearch] = useState("");

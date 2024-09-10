@@ -1,0 +1,10 @@
+.music-card-hover:hover {
+    background-color: #77bd776b;
+    border-radius: 25px;
+}
+
+.list-musics {
+    height: 49vh; 
+    background-color: #b2b6b26b;
+    border-radius: 25px;
+}

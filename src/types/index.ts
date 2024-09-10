@@ -20,6 +20,7 @@ export type songsColletion = {
   trackName: string;
   previewUrl: string;
   trackId: number;
+  artworkUrl100?: string;
   onFavoriteToggle?: (trackId: number, isFavorite: boolean) => void;
 };
 
@@ -33,4 +34,4 @@ export type User = {
 export type NavLinkComponentType = {
   link: string;
   dataTest: string;
-}
+};
