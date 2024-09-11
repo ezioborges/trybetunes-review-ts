@@ -34,7 +34,6 @@ function App() {
           <Route path='/favorites' element={ <Favorites /> } />
           <Route path='/profile' element={ <Profile /> } />
           <Route path='/profile/edit' element={<ProfileEdit />} />
-          {/* <Route path='/testes' element={} /> */}
         </Route>
         <Route path='/*' element={ <NotFound /> } />
       </Routes>
