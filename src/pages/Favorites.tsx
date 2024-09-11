@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { readFavoriteSongs } from "../../services/favoriteSongsAPI";
-import { songsColletion } from "../../types";
-import MusicCard from "../../components/MusicCard";
-import Loading from "../../components/Loading";
+import { readFavoriteSongs } from "../services/favoriteSongsAPI";
+import { songsColletion } from "../types";
+import MusicCard from "../components/MusicCard";
+import Loading from "../components/Loading";
 
 function Favorites() {
   const [favSongs, setFavSongs] = useState<songsColletion[]>([]);

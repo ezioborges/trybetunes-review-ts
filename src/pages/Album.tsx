@@ -1,11 +1,11 @@
 import { useLocation } from "react-router-dom";
-import getMusics from "../../services/musicsAPI";
+import getMusics from "../services/musicsAPI";
 import { useEffect, useState } from "react";
-import { songsColletion } from "../../types";
-import MusicCard from "../../components/MusicCard";
-import Loading from "../../components/Loading";
+import { songsColletion } from "../types";
+import MusicCard from "../components/MusicCard";
+import Loading from "../components/Loading";
 
-import '../../styles/music-card-hover.css';
+import '../styles/music-card-hover.css';
 
 function Album() {
   const location = useLocation();
